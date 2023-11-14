@@ -1,4 +1,4 @@
-mport { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // Action
 export const fetchTodos = createAsyncThunk("fetchTodos", async (url) => {
