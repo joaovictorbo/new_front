@@ -1,9 +1,9 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+mport { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // Action
-export const fetchTodos = createAsyncThunk("fetchTodos", async ( selectedPolo) => {
-  if ((!!selectedPolo) && !(selectedPolo == -1 )){
-    const response = await fetch("https://votacaocode.snctjp.com.br:8001/turma/" + `?serch=${selectedPolo}`);
+export const fetchTodos = createAsyncThunk("fetchTodos", async (url) => {
+  if ((url)){
+    const response = await fetch(url);
     return response.json();
 
   }else{
@@ -36,3 +36,4 @@ const todoSlice = createSlice({
 });
 
 export default todoSlice.reducer;
+
