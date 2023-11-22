@@ -9,12 +9,16 @@ import "./get.css";
 import ReCAPTCHA from "react-google-recaptcha"
 import Card from "./card.js";
 
+import { GoogleReCaptcha } from 'react-google-recaptcha-v3';
+
 const Dados = () => {
   const [posts, setPosts] = React.useState([]);
   const [verifica, setVerifica] = React.useState(false);
   const [disableVoteButton, setDisableVoteButton] = React.useState(false);
+  
+  const [token, setToken] = useState('');
 
-  const dataurl = "https://votacaocode.snctjp.com.br:8001/turma/";
+  const dataurl = "http://192.168.20.185:8000/turma/";
   const captchaRefs = useRef([]);
   const usedCaptchaRefs = useRef([]);
   const dispatch = useDispatch();
@@ -72,6 +76,14 @@ const Dados = () => {
         backgroundSize: "cover",
       }}
     >
+          <div>
+            <GoogleReCaptcha
+              onVerify={(token) => {
+                setToken(token);
+              }}
+            />
+          </div>
+
       <div
         style={{ backgroundImage: "linear-gradient(to right, #E2595E, #7AF0F6)", }}
       >
@@ -86,7 +98,9 @@ const Dados = () => {
 
       <div className="col-12 justify-content-center">
         <div className="row justify-content-center">
-          {state.todo.data && state.todo.data['detail'].map(post) && state.todo.data['results'].map((post, index) => (
+          {state.todo.data && 
+          // state.todo.data['detail'].map(post) && 
+          state.todo.data['results'].map((post, index) => (
             <div key={post.id} className="col-md p-4">
               <div
                 key={post.id}

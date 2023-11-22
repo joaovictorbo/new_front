@@ -7,7 +7,7 @@ export const fetchTodos = createAsyncThunk("fetchTodos", async (url) => {
     return response.json();
 
   }else{
-    const response = await fetch("https://votacaocode.snctjp.com.br:8001/turma/");
+    const response = await fetch("http://192.168.20.185:8000/turma/");
     return response.json();
 
   }

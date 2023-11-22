@@ -12,6 +12,10 @@ import {
 } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import {
+  GoogleReCaptchaProvider,
+} from 'react-google-recaptcha-v3';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,7 +36,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router}/>
+      
+      <GoogleReCaptchaProvider reCaptchaKey="6LePCE0gAAAAAApfvKJVZ-WMJMAjIWbjUKVXIb0N">
+        <RouterProvider router={router}/>
+      
+      </GoogleReCaptchaProvider>
     </Provider>
 
   </React.StrictMode>
