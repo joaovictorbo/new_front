@@ -6,6 +6,7 @@ import {
   MDBIcon,
 } from 'mdb-react-ui-kit';
 import logo from './assets/CODE.png';
+import logomarca from './assets/logomarca.png'
 
 export default function Navbar1() {
   const [showBasic, setShowBasic] = useState(false);
@@ -14,6 +15,7 @@ export default function Navbar1() {
     <MDBNavbar expand='lg' light bgColor='white'>
       <MDBContainer fluid>
        <img src={logo} alt="a"height="40"loading="lazy"/> 
+       <img src={logomarca} alt="a"height="40"loading="lazy" />
 
         <MDBNavbarToggler
           aria-controls='navbarSupportedContent'

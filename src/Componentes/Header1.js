@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+
 import rectangle from './assets/Rectangle37.png';
 import code2 from './assets/CODE2.png';
 import grupo from './assets/Grupo.png';
-import voteImage from './assets/Rectangle1.png';
-import Modal from './modal.js';
 
 export default function Header1() {
 
