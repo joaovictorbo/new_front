@@ -1,13 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import { fetchTodos } from "../../redux/slice/todo";
 import React, { useRef, useState, useEffect } from "react";
 import grupo from "../../Componentes/assets/grupo2.png";
-import Modal from "../../Componentes/modalcopy";
-import YouTube from 'react-youtube';
 import "./get.css";
-import ReCAPTCHA from "react-google-recaptcha"
-import Card from "./card.js";
 import apiNotify from '../../apiNotify';
 
 
@@ -17,6 +12,9 @@ const Dados = () => {
   const [posts, setPosts] = React.useState([]);
   const [verifica, setVerifica] = React.useState(false);
   const [disableVoteButton, setDisableVoteButton] = React.useState(false);
+
+  const [disableProxButton, setDisableProxButton] = React.useState(false);
+  // const [isSetToken, setIsSetToken] = React.useState(false);
   
   const [token, setToken] = useState('');
 
@@ -25,10 +23,10 @@ const Dados = () => {
   const usedCaptchaRefs = useRef([]);
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
-  const opts = {
-    height: '150',
-    width: '194',
-  }
+  // const opts = {
+  //   height: '150',
+  //   width: '194',
+  // }
 
   const [pageTitle] = useState('Votação Festival');
   useEffect(() => {
@@ -44,10 +42,19 @@ const Dados = () => {
     }
   }, [disableVoteButton]);
 
-  function onChange(value, index) {
-    setVerifica(true);
-    usedCaptchaRefs.current.push(index);
-  }
+  useEffect(() => {
+    if (disableProxButton) {
+      const timer = setTimeout(() => {
+        setDisableProxButton(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [disableProxButton]);  
+
+  // function onChange(value, index) {
+  //   setVerifica(true);
+  //   usedCaptchaRefs.current.push(index);
+  // }
 
   const votar = async (id, index) => {
     // const response = await  axios.patch(dataurl + 'Votar/' + id + '/');
@@ -83,7 +90,9 @@ const Dados = () => {
           <div>
             <GoogleReCaptcha
               onVerify={(token) => {
-                setToken(token);
+                if (!token){
+                  setToken(token);
+                }                 
               }}
             />
           </div>
@@ -128,7 +137,7 @@ const Dados = () => {
                       id="redirect"
                       className="btn btn-success votar"
                       style={{ float: "right" }}
-                      disabled={!verifica || disableVoteButton}
+                      disabled={ disableVoteButton}
                       onClick={(e) => {
                         votar(post.id, index);
                         setVerifica(false);
@@ -137,20 +146,20 @@ const Dados = () => {
                     >
                       votar
                     </button>
-                    <ReCAPTCHA
+                    {/* <ReCAPTCHA
                       ref={(ref) => captchaRefs.current[index] = ref}
-                      sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                      sitekey='6LfqBaMaAAAAAF_GDt8y8EBxjZYIJiLfYsludp2j'
                       onChange={(value) => onChange(value, index)}
                       style={{ transform: "scale(0.5)", WebkitTransform: "scale(0.5)", transformOrigin: "0 0", WebkitTransformOrigin: "0 0", marginTop: "60px" }}
-                    />
+                    /> */}
                   </p>
                 </div>
               </div>
             </div>
           ))}
           <div>
-            <button id="previous-page" className="btn btn-success" disabled = {!state.todo.data} style={{ float: "left" }} onClick={(e) => { dispatch(fetchTodos(state.todo.data['previous'])); }}> página anterior</button>
-            <button id="next-page" className="btn btn-success"  disabled = {!state.todo.data} style={{ float: "right" }} onClick={(e) => { dispatch(fetchTodos(state.todo.data['next'])); }}> próxima página</button>
+            <button disabled={disableProxButton} id="previous-page" className="btn btn-success" style={{ float: "left" }} onClick={(e) => {setDisableProxButton(true); dispatch(fetchTodos(state.todo.data['previous'])); }}> página anterior</button>
+            <button disabled={disableProxButton} id="next-page" className="btn btn-success" style={{ float: "right" }} onClick={(e) => { setDisableProxButton(true); dispatch(fetchTodos(state.todo.data['next'])); }}> próxima página</button>
           </div>
         </div>
       </div>

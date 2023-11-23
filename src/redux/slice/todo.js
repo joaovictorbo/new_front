@@ -17,18 +17,21 @@ export const fetchTodos = createAsyncThunk("fetchTodos", async (url) => {
     return response.json();
 
   }else{
-    const response = await fetch("https://votacaocode.snctjp.com.br/api/turma/",
-    { 
-      method: 'GET', 
-      headers: new Headers({
-          'Authorization': `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik5vdGlmaWNhdGlvbiB1c2VyIn0.CqzRyO-ZpnSEJQJebvFDmfFsb-dOUSGCHTPAhLTVqGRFqmG7PyU1bgLJW7LG-n1vELaHek-beaKnunWvwo47fA`, 
-          'Content-Type': 'application/x-www-form-urlencoded'
-      }) 
-      }
-    );
+    try {
+        const response = await fetch("https://votacaocode.snctjp.com.br/api/turma/",
+        { 
+          method: 'GET', 
+          headers: new Headers({
+              'Authorization': `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik5vdGlmaWNhdGlvbiB1c2VyIn0.CqzRyO-ZpnSEJQJebvFDmfFsb-dOUSGCHTPAhLTVqGRFqmG7PyU1bgLJW7LG-n1vELaHek-beaKnunWvwo47fA`, 
+              'Content-Type': 'application/x-www-form-urlencoded'
+          }) 
+          }
+        );            
+      return response.json();  
+    } catch (error) {
+      
+    }
     
-    
-    return response.json();
 
   }
 });
