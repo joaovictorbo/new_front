@@ -149,8 +149,8 @@ const Dados = () => {
             </div>
           ))}
           <div>
-            <button id="previous-page" className="btn btn-success" style={{ float: "left" }} onClick={(e) => { dispatch(fetchTodos(state.todo.data['previous'])); }}> página anterior</button>
-            <button id="next-page" className="btn btn-success" style={{ float: "right" }} onClick={(e) => { dispatch(fetchTodos(state.todo.data['next'])); }}> próxima página</button>
+            <button id="previous-page" className="btn btn-success" disabled = {!state.todo.data} style={{ float: "left" }} onClick={(e) => { dispatch(fetchTodos(state.todo.data['previous'])); }}> página anterior</button>
+            <button id="next-page" className="btn btn-success"  disabled = {!state.todo.data} style={{ float: "right" }} onClick={(e) => { dispatch(fetchTodos(state.todo.data['next'])); }}> próxima página</button>
           </div>
         </div>
       </div>
