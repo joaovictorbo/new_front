@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const API_URL_NOTIFY    = "http://localhost:8000/";
+const API_URL_NOTIFY    = "https://votacaocode.snctjp.com.br/api/";
 const TOKEN_API_NOTIFY  = process.env.TOKEN_API_NOTIFY  || 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik5vdGlmaWNhdGlvbiB1c2VyIn0.CqzRyO-ZpnSEJQJebvFDmfFsb-dOUSGCHTPAhLTVqGRFqmG7PyU1bgLJW7LG-n1vELaHek-beaKnunWvwo47fA';
 
 
