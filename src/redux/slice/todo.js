@@ -3,11 +3,31 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // Action
 export const fetchTodos = createAsyncThunk("fetchTodos", async (url) => {
   if ((url)){
-    const response = await fetch(url);
+    const response = await fetch(url,
+      { 
+        method: 'GET', 
+        headers: new Headers({
+            'Authorization': `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik5vdGlmaWNhdGlvbiB1c2VyIn0.CqzRyO-ZpnSEJQJebvFDmfFsb-dOUSGCHTPAhLTVqGRFqmG7PyU1bgLJW7LG-n1vELaHek-beaKnunWvwo47fA`, 
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }) 
+        }
+      
+      );
+    
     return response.json();
 
   }else{
-    const response = await fetch("http://192.168.20.185:8000/turma/");
+    const response = await fetch("http://127.0.0.1:8000/turma/",
+    { 
+      method: 'GET', 
+      headers: new Headers({
+          'Authorization': `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik5vdGlmaWNhdGlvbiB1c2VyIn0.CqzRyO-ZpnSEJQJebvFDmfFsb-dOUSGCHTPAhLTVqGRFqmG7PyU1bgLJW7LG-n1vELaHek-beaKnunWvwo47fA`, 
+          'Content-Type': 'application/x-www-form-urlencoded'
+      }) 
+      }
+    );
+    
+    
     return response.json();
 
   }

@@ -8,6 +8,8 @@ import YouTube from 'react-youtube';
 import "./get.css";
 import ReCAPTCHA from "react-google-recaptcha"
 import Card from "./card.js";
+import apiNotify from '../../apiNotify';
+
 
 import { GoogleReCaptcha } from 'react-google-recaptcha-v3';
 
@@ -18,7 +20,7 @@ const Dados = () => {
   
   const [token, setToken] = useState('');
 
-  const dataurl = "http://192.168.20.185:8000/turma/";
+  // const dataurl = "http://192.168.20.185:8000/turma/";
   const captchaRefs = useRef([]);
   const usedCaptchaRefs = useRef([]);
   const dispatch = useDispatch();
@@ -48,14 +50,16 @@ const Dados = () => {
   }
 
   const votar = async (id, index) => {
-    const response = await axios.patch(dataurl + 'Votar/' + id + '/');
+    // const response = await  axios.patch(dataurl + 'Votar/' + id + '/');
+    const response = await  apiNotify.patch('/turma/' + 'Votar/' + id + '/');
     usedCaptchaRefs.current = usedCaptchaRefs.current.filter((usedIndex) => usedIndex !== index);
     setDisableVoteButton(true);
   }
 
   const getPosts = async () => {
     try {
-      const response = await axios.get(dataurl);
+      // const response = await axios.get(dataurl);
+      const response = await apiNotify.get('/turma/');
       const data = response.data;
       setPosts(data);
     } catch (error) {
